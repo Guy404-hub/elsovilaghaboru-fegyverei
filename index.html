@@ -96,14 +96,13 @@ body{background:#0a0804;color:#e8dcc8;font-family:Georgia,serif;overflow-x:hidde
 .bar-num{font-size:11px;color:#c8a050;white-space:nowrap;font-family:Georgia,serif}
 .cmp-note{font-size:11px;color:rgba(200,180,150,0.32);margin-top:16px;font-style:italic;text-align:center}
 
-.w-btn-photo{width:100%;height:64px;object-fit:cover;display:block;filter:sepia(0.85) contrast(1.1) brightness(0.85) grayscale(0.3);border-bottom:1px solid rgba(180,140,60,0.15);transition:filter 0.3s}
-.w-btn:hover .w-btn-photo,.w-btn.active .w-btn-photo{filter:sepia(0.6) contrast(1.15) brightness(0.95) grayscale(0.1)}
-.w-btn-bottom{display:flex;align-items:center;gap:6px;padding:8px 6px 10px}
-.wd-photo-wrap{flex-shrink:0;width:160px;position:relative}
-.wd-photo{width:160px;height:110px;object-fit:cover;display:block;filter:sepia(0.9) contrast(1.12) brightness(0.8) grayscale(0.25);border:1px solid rgba(180,140,60,0.3)}
-.wd-photo-cap{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(180,140,60,0.4);text-align:center;margin-top:4px;font-style:italic}
+.w-btn-illus{width:100%;height:68px;display:block;background:#080602;border-bottom:1px solid rgba(180,140,60,0.15);overflow:hidden}.w-btn-illus svg{width:100%;height:100%}
+.w-btn-bottom{display:flex;align-items:center;gap:6px;padding:7px 6px 9px}
+.wd-photo-wrap{flex-shrink:0;width:170px;position:relative}
+.wd-illus-large{width:170px;height:118px;display:block;background:#080602;border:1px solid rgba(180,140,60,0.25)}.wd-illus-large svg{width:100%;height:100%}
+.wd-photo-cap{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(180,140,60,0.38);text-align:center;margin-top:4px;font-style:italic}
 .wd-photo-frame{position:relative;display:inline-block}
-.wd-photo-frame::after{content:'';position:absolute;inset:4px;border:1px solid rgba(180,140,60,0.18);pointer-events:none}
+.wd-photo-frame::after{content:'';position:absolute;inset:5px;border:1px solid rgba(180,140,60,0.14);pointer-events:none}
 .q-prog{display:flex;gap:5px;margin-bottom:20px}
 .q-pip{height:3px;flex:1;background:rgba(180,140,60,0.13);border-radius:2px;transition:background 0.4s}
 .q-pip.done{background:#b8933a}
@@ -165,6 +164,107 @@ body{background:#0a0804;color:#e8dcc8;font-family:Georgia,serif;overflow-x:hidde
 <div id="p-kviz" class="panel"><div class="section" id="quizEl"></div></div>
 
 <script>
+const ILLUS={
+  'cannon':`<svg viewBox="0 0 200 68" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="68" fill="#080602"/>
+<line x1="0" y1="56" x2="200" y2="56" stroke="#6b5020" stroke-width="1"/>
+<!-- wheel back --><circle cx="52" cy="56" r="13" fill="none" stroke="#8a6828" stroke-width="1.5"/>
+<line x1="52" y1="43" x2="52" y2="56" stroke="#8a6828" stroke-width="1"/><line x1="39" y1="56" x2="65" y2="56" stroke="#8a6828" stroke-width="1"/><line x1="43" y1="47" x2="61" y2="65" stroke="#8a6828" stroke-width="1"/><line x1="61" y1="47" x2="43" y2="65" stroke="#8a6828" stroke-width="1"/>
+<!-- wheel front --><circle cx="85" cy="56" r="13" fill="none" stroke="#8a6828" stroke-width="1.5"/>
+<line x1="85" y1="43" x2="85" y2="69" stroke="#8a6828" stroke-width="1"/><line x1="72" y1="56" x2="98" y2="56" stroke="#8a6828" stroke-width="1"/><line x1="76" y1="47" x2="94" y2="65" stroke="#8a6828" stroke-width="1"/><line x1="94" y1="47" x2="76" y2="65" stroke="#8a6828" stroke-width="1"/>
+<!-- axle --><rect x="50" y="42" width="37" height="5" rx="1" fill="#6b5020" stroke="#8a6828" stroke-width="1"/>
+<!-- body --><rect x="45" y="34" width="60" height="10" rx="2" fill="#5a4018" stroke="#9a7830" stroke-width="1"/>
+<!-- barrel --><rect x="100" y="32" width="85" height="9" rx="2" fill="#6b5020" stroke="#9a7830" stroke-width="1.5"/>
+<!-- muzzle ring --><rect x="180" y="30" width="6" height="13" rx="1" fill="#8a6828" stroke="#b8933a" stroke-width="1"/>
+<!-- detail lines on barrel --><line x1="110" y1="32" x2="110" y2="41" stroke="#9a7830" stroke-width="0.5"/><line x1="125" y1="32" x2="125" y2="41" stroke="#9a7830" stroke-width="0.5"/><line x1="155" y1="32" x2="155" y2="41" stroke="#9a7830" stroke-width="0.5"/>
+<!-- hatching shadow --><line x1="45" y1="44" x2="105" y2="44" stroke="#9a7830" stroke-width="0.3" stroke-dasharray="2 2"/>
+<text x="4" y="14" font-size="7" fill="#6b5020" font-family="Georgia,serif">TÜZÉRSÉGI ÁGYÚ</text>
+<text x="4" y="23" font-size="5" fill="#4a3810" font-family="Georgia,serif">NAGY-BRITANNIA · 1916</text></svg>`,
+  'gas':`<svg viewBox="0 0 200 68" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="68" fill="#080602"/>
+<!-- ground --><rect x="0" y="55" width="200" height="13" fill="#0e0d08"/>
+<line x1="0" y1="55" x2="200" y2="55" stroke="#4a3810" stroke-width="1"/>
+<!-- canister left --><rect x="8" y="38" width="14" height="20" rx="2" fill="#2a2808" stroke="#6b5820" stroke-width="1"/>
+<ellipse cx="15" cy="38" rx="7" ry="3" fill="#3a3810" stroke="#6b5820" stroke-width="1"/>
+<rect x="13" y="34" width="4" height="5" fill="#4a4818" stroke="#6b5820" stroke-width="0.5"/>
+<!-- canister right --><rect x="28" y="40" width="12" height="18" rx="2" fill="#2a2808" stroke="#6b5820" stroke-width="1"/>
+<ellipse cx="34" cy="40" rx="6" ry="2.5" fill="#3a3810" stroke="#6b5820" stroke-width="1"/>
+<!-- cloud 1 --><ellipse cx="72" cy="42" rx="22" ry="14" fill="#1a2208" opacity="0.9" stroke="#4a5818" stroke-width="0.5"/>
+<ellipse cx="58" cy="44" rx="14" ry="10" fill="#1a2208" stroke="#4a5818" stroke-width="0.5"/>
+<ellipse cx="88" cy="46" rx="16" ry="9" fill="#1a2208" stroke="#4a5818" stroke-width="0.5"/>
+<!-- cloud 2 --><ellipse cx="135" cy="36" rx="26" ry="16" fill="#182008" opacity="0.85" stroke="#3a5010" stroke-width="0.5"/>
+<ellipse cx="118" cy="40" rx="17" ry="11" fill="#182008" stroke="#3a5010" stroke-width="0.5"/>
+<ellipse cx="155" cy="40" rx="18" ry="10" fill="#182008" stroke="#3a5010" stroke-width="0.5"/>
+<!-- cloud 3 faint --><ellipse cx="185" cy="30" rx="18" ry="12" fill="#141c06" opacity="0.7" stroke="#304010" stroke-width="0.5"/>
+<!-- hatching on clouds --><line x1="55" y1="38" x2="70" y2="48" stroke="#4a5818" stroke-width="0.3"/><line x1="62" y1="35" x2="78" y2="46" stroke="#4a5818" stroke-width="0.3"/><line x1="125" y1="32" x2="140" y2="44" stroke="#3a5010" stroke-width="0.3"/>
+<!-- soldiers silhouette --><rect x="50" y="50" width="4" height="8" rx="1" fill="#1a1808"/><circle cx="52" cy="48" r="3" fill="#1a1808"/>
+<rect x="62" y="51" width="4" height="7" rx="1" fill="#1a1808"/><circle cx="64" cy="49" r="3" fill="#1a1808"/>
+<text x="4" y="12" font-size="7" fill="#4a5018" font-family="Georgia,serif">MÉRGES GÁZ</text>
+<text x="4" y="21" font-size="5" fill="#3a4010" font-family="Georgia,serif">YPRES · 1915</text></svg>`,
+  'tank':`<svg viewBox="0 0 200 68" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="68" fill="#080602"/>
+<line x1="0" y1="58" x2="200" y2="58" stroke="#4a3810" stroke-width="1"/>
+<!-- track --><rect x="20" y="45" width="130" height="15" rx="7" fill="#1a1408" stroke="#6b5020" stroke-width="1.5"/>
+<!-- track detail --><line x1="35" y1="45" x2="35" y2="60" stroke="#4a3010" stroke-width="0.7"/><line x1="50" y1="45" x2="50" y2="60" stroke="#4a3010" stroke-width="0.7"/><line x1="65" y1="45" x2="65" y2="60" stroke="#4a3010" stroke-width="0.7"/><line x1="80" y1="45" x2="80" y2="60" stroke="#4a3010" stroke-width="0.7"/><line x1="95" y1="45" x2="95" y2="60" stroke="#4a3010" stroke-width="0.7"/><line x1="110" y1="45" x2="110" y2="60" stroke="#4a3010" stroke-width="0.7"/><line x1="125" y1="45" x2="125" y2="60" stroke="#4a3010" stroke-width="0.7"/>
+<!-- wheels --><circle cx="30" cy="52" r="7" fill="#0e0c06" stroke="#8a6828" stroke-width="1.2"/><circle cx="55" cy="52" r="6" fill="#0e0c06" stroke="#7a5c24" stroke-width="1"/><circle cx="80" cy="52" r="6" fill="#0e0c06" stroke="#7a5c24" stroke-width="1"/><circle cx="105" cy="52" r="6" fill="#0e0c06" stroke="#7a5c24" stroke-width="1"/><circle cx="140" cy="52" r="7" fill="#0e0c06" stroke="#8a6828" stroke-width="1.2"/>
+<!-- body rhomboid --><polygon points="25,20 155,20 170,45 10,45" fill="#2a2010" stroke="#8a6828" stroke-width="1.5"/>
+<!-- body hatching --><line x1="40" y1="22" x2="25" y2="43" stroke="#4a3810" stroke-width="0.4"/><line x1="60" y1="22" x2="42" y2="43" stroke="#4a3810" stroke-width="0.4"/><line x1="85" y1="21" x2="65" y2="43" stroke="#4a3810" stroke-width="0.4"/><line x1="115" y1="21" x2="95" y2="43" stroke="#4a3810" stroke-width="0.4"/><line x1="140" y1="21" x2="125" y2="43" stroke="#4a3810" stroke-width="0.4"/>
+<!-- turret top --><rect x="65" y="12" width="55" height="10" rx="2" fill="#3a2c14" stroke="#9a7830" stroke-width="1"/>
+<!-- sponson gun right --><rect x="155" y="30" width="30" height="6" rx="1" fill="#4a3818" stroke="#8a6828" stroke-width="1"/>
+<!-- sponson gun left --><rect x="15" y="30" width="12" height="6" rx="1" fill="#4a3818" stroke="#8a6828" stroke-width="1"/>
+<!-- hatching on turret --><line x1="70" y1="13" x2="70" y2="22" stroke="#6a5020" stroke-width="0.5"/><line x1="80" y1="13" x2="80" y2="22" stroke="#6a5020" stroke-width="0.5"/><line x1="95" y1="13" x2="95" y2="22" stroke="#6a5020" stroke-width="0.5"/><line x1="110" y1="13" x2="110" y2="22" stroke="#6a5020" stroke-width="0.5"/>
+<text x="4" y="10" font-size="6" fill="#6b5020" font-family="Georgia,serif">MARK I · HARCKOCSI</text></svg>`,
+  'plane':`<svg viewBox="0 0 200 68" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="68" fill="#080602"/>
+<!-- sky lines --><line x1="0" y1="15" x2="200" y2="18" stroke="#1a1408" stroke-width="1.5"/><line x1="0" y1="28" x2="200" y2="30" stroke="#141008" stroke-width="1"/>
+<!-- lower wing --><polygon points="30,52 170,52 155,58 45,58" fill="#1a1408" stroke="#6b5020" stroke-width="1"/>
+<!-- upper wing --><polygon points="40,28 165,26 155,32 50,34" fill="#1a1408" stroke="#6b5020" stroke-width="1"/>
+<!-- fuselage --><ellipse cx="100" cy="42" rx="65" ry="8" fill="#2a2010" stroke="#8a6828" stroke-width="1.5"/>
+<!-- cockpit --><ellipse cx="82" cy="38" rx="12" ry="6" fill="#1a1408" stroke="#9a7830" stroke-width="1"/>
+<ellipse cx="82" cy="37" rx="8" ry="4" fill="#0e0c06" stroke="#6a5020" stroke-width="0.5"/>
+<!-- tail --><polygon points="155,40 175,30 178,42 165,46" fill="#2a2010" stroke="#7a6020" stroke-width="1"/>
+<polygon points="155,44 168,55 160,50 155,48" fill="#2a2010" stroke="#7a6020" stroke-width="1"/>
+<!-- engine --><ellipse cx="40" cy="42" rx="9" ry="7" fill="#1e1808" stroke="#8a6828" stroke-width="1.5"/>
+<!-- propeller --><line x1="40" y1="28" x2="40" y2="56" stroke="#9a7830" stroke-width="2.5"/>
+<line x1="30" y1="36" x2="50" y2="48" stroke="#9a7830" stroke-width="1.5"/>
+<!-- struts between wings --><line x1="65" y1="32" x2="62" y2="52" stroke="#7a6020" stroke-width="1"/><line x1="100" y1="30" x2="98" y2="52" stroke="#7a6020" stroke-width="1"/><line x1="135" y1="29" x2="135" y2="52" stroke="#7a6020" stroke-width="1"/>
+<!-- fuselage hatching --><line x1="55" y1="38" x2="55" y2="47" stroke="#4a3810" stroke-width="0.4"/><line x1="75" y1="37" x2="75" y2="48" stroke="#4a3810" stroke-width="0.4"/><line x1="110" y1="37" x2="112" y2="49" stroke="#4a3810" stroke-width="0.4"/><line x1="130" y1="38" x2="133" y2="49" stroke="#4a3810" stroke-width="0.4"/>
+<!-- iron cross marking --><line x1="105" y1="42" x2="115" y2="42" stroke="#b8933a" stroke-width="1.5"/><line x1="110" y1="37" x2="110" y2="47" stroke="#b8933a" stroke-width="1.5"/>
+<text x="4" y="10" font-size="6" fill="#6b5020" font-family="Georgia,serif">FOKKER DR.I VADÁSZGÉP</text></svg>`,
+  'gun':`<svg viewBox="0 0 200 68" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="68" fill="#080602"/>
+<line x1="0" y1="58" x2="200" y2="58" stroke="#4a3810" stroke-width="1"/>
+<!-- sandbag wall --><ellipse cx="22" cy="57" rx="18" ry="6" fill="#2a2410" stroke="#4a3810" stroke-width="0.5"/><ellipse cx="50" cy="56" rx="20" ry="6" fill="#252110" stroke="#4a3810" stroke-width="0.5"/><ellipse cx="78" cy="57" rx="18" ry="6" fill="#2a2410" stroke="#4a3810" stroke-width="0.5"/>
+<ellipse cx="36" cy="50" rx="19" ry="6" fill="#201e0c" stroke="#4a3810" stroke-width="0.5"/><ellipse cx="64" cy="50" rx="19" ry="6" fill="#201e0c" stroke="#4a3810" stroke-width="0.5"/>
+<ellipse cx="50" cy="43" rx="19" ry="5" fill="#1c1a0a" stroke="#3a2e08" stroke-width="0.5"/>
+<!-- tripod legs --><line x1="55" y1="42" x2="38" y2="58" stroke="#7a6020" stroke-width="2"/><line x1="62" y1="42" x2="62" y2="58" stroke="#7a6020" stroke-width="2"/><line x1="69" y1="42" x2="86" y2="58" stroke="#7a6020" stroke-width="2"/>
+<!-- gun body --><rect x="42" y="30" width="38" height="14" rx="2" fill="#2a2010" stroke="#8a6828" stroke-width="1.5"/>
+<!-- receiver detail --><rect x="52" y="28" width="18" height="4" rx="1" fill="#1e1808" stroke="#7a5c24" stroke-width="1"/>
+<!-- barrel --><rect x="78" y="33" width="80" height="8" rx="2" fill="#3a2c14" stroke="#9a7830" stroke-width="1.5"/>
+<!-- muzzle --><rect x="154" y="31" width="8" height="12" rx="1" fill="#4a3818" stroke="#b8933a" stroke-width="1"/>
+<!-- barrel rings --><line x1="90" y1="33" x2="90" y2="41" stroke="#6a5020" stroke-width="1"/><line x1="110" y1="33" x2="110" y2="41" stroke="#6a5020" stroke-width="1"/><line x1="135" y1="33" x2="135" y2="41" stroke="#6a5020" stroke-width="1"/>
+<!-- feed belt --><path d="M 42 36 Q 28 36 20 42 Q 14 48 16 55" fill="none" stroke="#6a5020" stroke-width="2"/>
+<!-- bullet circles on belt --><circle cx="38" cy="36" r="2" fill="#7a6028"/><circle cx="32" cy="37" r="2" fill="#7a6028"/><circle cx="26" cy="39" r="2" fill="#7a6028"/><circle cx="21" cy="43" r="2" fill="#7a6028"/>
+<!-- operator silhouette --><rect x="4" y="38" width="8" height="20" rx="1" fill="#1a1408"/><circle cx="8" cy="35" r="5" fill="#1a1408"/>
+<rect x="12" y="40" width="28" height="4" rx="1" fill="#1a1408"/>
+<text x="90" y="14" font-size="6" fill="#6b5020" font-family="Georgia,serif">MAXIM GÉPPUSKA · 1915</text></svg>`,
+  'sub':`<svg viewBox="0 0 200 68" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="68" fill="#080602"/>
+<!-- sky --><rect x="0" y="0" width="200" height="28" fill="#06080e"/>
+<!-- horizon --><line x1="0" y1="28" x2="200" y2="28" stroke="#1a2030" stroke-width="1"/>
+<!-- water --><rect x="0" y="28" width="200" height="40" fill="#06080e"/>
+<!-- water ripples --><path d="M 0 32 Q 25 28 50 32 Q 75 36 100 32 Q 125 28 150 32 Q 175 36 200 32" fill="none" stroke="#1a2838" stroke-width="1"/>
+<path d="M 0 38 Q 30 35 60 38 Q 90 41 120 38 Q 150 35 180 38 Q 190 39 200 38" fill="none" stroke="#141e28" stroke-width="0.7"/>
+<!-- hull --><ellipse cx="105" cy="50" rx="80" ry="12" fill="#0e1010" stroke="#5a7060" stroke-width="1.5"/>
+<!-- hull plating lines --><line x1="45" y1="50" x2="50" y2="50" stroke="#3a5048" stroke-width="2"/><line x1="65" y1="50" x2="75" y2="50" stroke="#3a5048" stroke-width="2"/><line x1="90" y1="50" x2="105" y2="50" stroke="#3a5048" stroke-width="2"/><line x1="120" y1="50" x2="135" y2="50" stroke="#3a5048" stroke-width="2"/><line x1="150" y1="50" x2="160" y2="50" stroke="#3a5048" stroke-width="2"/>
+<!-- hull hatching --><line x1="50" y1="44" x2="55" y2="56" stroke="#2a4038" stroke-width="0.4"/><line x1="70" y1="43" x2="75" y2="57" stroke="#2a4038" stroke-width="0.4"/><line x1="95" y1="42" x2="100" y2="58" stroke="#2a4038" stroke-width="0.4"/><line x1="120" y1="42" x2="125" y2="58" stroke="#2a4038" stroke-width="0.4"/><line x1="145" y1="43" x2="150" y2="57" stroke="#2a4038" stroke-width="0.4"/>
+<!-- conning tower --><rect x="88" y="34" width="28" height="16" rx="2" fill="#101414" stroke="#5a7060" stroke-width="1.5"/>
+<rect x="93" y="30" width="18" height="6" rx="1" fill="#0e1212" stroke="#4a6050" stroke-width="1"/>
+<!-- portholes --><circle cx="94" cy="42" r="3" fill="#060a0a" stroke="#4a6050" stroke-width="1"/><circle cx="106" cy="42" r="3" fill="#060a0a" stroke="#4a6050" stroke-width="1"/>
+<!-- periscope --><line x1="100" y1="8" x2="100" y2="30" stroke="#5a7060" stroke-width="2"/>
+<line x1="100" y1="8" x2="116" y2="8" stroke="#5a7060" stroke-width="2"/>
+<circle cx="116" cy="8" r="3" fill="#0a1010" stroke="#5a7060" stroke-width="1"/>
+<!-- torpedo --><ellipse cx="22" cy="46" rx="17" ry="4" fill="#2a3830" stroke="#4a6050" stroke-width="1"/>
+<polygon points="5,44 5,48 2,46" fill="#3a5040"/>
+<!-- bubbles --><circle cx="38" cy="38" r="3" fill="none" stroke="#2a3838" stroke-width="0.7"/><circle cx="50" cy="32" r="4" fill="none" stroke="#1e2c2c" stroke-width="0.7"/><circle cx="30" cy="30" r="2.5" fill="none" stroke="#1e2c2c" stroke-width="0.7"/>
+<!-- flag --><line x1="116" y1="2" x2="116" y2="8" stroke="#5a7060" stroke-width="1"/>
+<polygon points="116,2 128,5 116,8" fill="#1a1408" stroke="#6b5020" stroke-width="0.5"/>
+<text x="4" y="12" font-size="6" fill="#3a5848" font-family="Georgia,serif">NÉMET U-BOOT · 1917</text></svg>`,
+};
 const W=[
   {icon:'💣',tag:'Tüzérség',name:'Tüzérségi ágyú',desc:'A háború legtöbb halálos áldozatát a tüzérség okozta. A nehézágyúk akár 40 km-es hatótávolsággal rendelkeztek, és tonnányi fémet zúdítottak az ellenséges állásokra nap mint nap.',stats:[{v:'40 km',l:'Hatótáv'},{v:'~60%',l:'Összes halálozás'},{v:'750 kg',l:'Lövedék súlya'}],extra:'A „Big Bertha" nevű német nehézágyú 940 kg-os lövedékeket lőhetett ki, és Párizst is elérte.',vis:'cannon',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Howitzer_world_war_1.jpg/320px-Howitzer_world_war_1.jpg'},
   {icon:'⚗️',tag:'Vegyifegyver',name:'Mérges gáz',desc:'1915-től klórgáz, foszgén és mustárgáz terrorba taszította a lövészárkokat. A mustárgáz bőrön, tüdőn és szemeken át egyaránt hatott.',stats:[{v:'1915',l:'Első bevetés'},{v:'3 típus',l:'Főbb gázok'},{v:'91 000',l:'Halálos áldozat'}],extra:'Az Ipernél bevetett klórgáz 6000 katona halálát okozta egyetlen nap alatt.',vis:'gas',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Second_Battle_of_Ypres_22_April_-_25_May_1915.png/320px-Second_Battle_of_Ypres_22_April_-_25_May_1915.png'},
@@ -497,7 +597,7 @@ function buildVisual(type,container){
 function renderW(){
   document.getElementById('wNav').innerHTML=W.map((w,i)=>`
     <div class="w-btn${i===aW?' active':''}" onclick="selW(${i},this)" style="animation:fadeUp 0.4s ease ${i*0.05}s both;padding:0;overflow:hidden">
-      <img class="w-btn-photo" src="${w.photo}" alt="${w.name}" onerror="this.style.display='none'">
+      <div class="w-btn-illus">${ILLUS[w.vis]||""}</div>
       <div class="w-btn-bottom">
         <span class="w-icon" style="font-size:20px;margin:0">${w.icon}</span>
         <span class="w-name">${w.name}</span>
@@ -509,7 +609,7 @@ function renderW(){
       <div class="wd-top">
         <div class="wd-photo-wrap">
           <div class="wd-photo-frame">
-            <img class="wd-photo" src="${w.photo}" alt="${w.name}" onerror="this.parentElement.parentElement.style.display='none'">
+            <div class="wd-illus-large">${ILLUS[w.vis]||''}</div>
           </div>
           <div class="wd-photo-cap">Korabeli fénykép · közkincses</div>
         </div>
