@@ -96,6 +96,14 @@ body{background:#0a0804;color:#e8dcc8;font-family:Georgia,serif;overflow-x:hidde
 .bar-num{font-size:11px;color:#c8a050;white-space:nowrap;font-family:Georgia,serif}
 .cmp-note{font-size:11px;color:rgba(200,180,150,0.32);margin-top:16px;font-style:italic;text-align:center}
 
+.w-btn-photo{width:100%;height:64px;object-fit:cover;display:block;filter:sepia(0.85) contrast(1.1) brightness(0.85) grayscale(0.3);border-bottom:1px solid rgba(180,140,60,0.15);transition:filter 0.3s}
+.w-btn:hover .w-btn-photo,.w-btn.active .w-btn-photo{filter:sepia(0.6) contrast(1.15) brightness(0.95) grayscale(0.1)}
+.w-btn-bottom{display:flex;align-items:center;gap:6px;padding:8px 6px 10px}
+.wd-photo-wrap{flex-shrink:0;width:160px;position:relative}
+.wd-photo{width:160px;height:110px;object-fit:cover;display:block;filter:sepia(0.9) contrast(1.12) brightness(0.8) grayscale(0.25);border:1px solid rgba(180,140,60,0.3)}
+.wd-photo-cap{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(180,140,60,0.4);text-align:center;margin-top:4px;font-style:italic}
+.wd-photo-frame{position:relative;display:inline-block}
+.wd-photo-frame::after{content:'';position:absolute;inset:4px;border:1px solid rgba(180,140,60,0.18);pointer-events:none}
 .q-prog{display:flex;gap:5px;margin-bottom:20px}
 .q-pip{height:3px;flex:1;background:rgba(180,140,60,0.13);border-radius:2px;transition:background 0.4s}
 .q-pip.done{background:#b8933a}
@@ -158,13 +166,12 @@ body{background:#0a0804;color:#e8dcc8;font-family:Georgia,serif;overflow-x:hidde
 
 <script>
 const W=[
-  {icon:'💣',tag:'Tüzérség',name:'Tüzérségi ágyú',desc:'A háború legtöbb halálos áldozatát a tüzérség okozta. A nehézágyúk akár 40 km-es hatótávolsággal rendelkeztek, és tonnányi fémet zúdítottak az ellenséges állásokra nap mint nap.',stats:[{v:'40 km',l:'Hatótáv'},{v:'~60%',l:'Összes halálozás'},{v:'750 kg',l:'Lövedék súlya'}],extra:'A „Big Bertha" nevű német nehézágyú 940 kg-os lövedékeket lőhetett ki, és Párizst is elérte.',vis:'cannon'},
-  
-  {icon:'⚗️',tag:'Vegyifegyver',name:'Mérges gáz',desc:'1915-től klórgáz, foszgén és mustárgáz terrorba taszította a lövészárkokat. A mustárgáz bőrön, tüdőn és szemeken át egyaránt hatott.',stats:[{v:'1915',l:'Első bevetés'},{v:'3 típus',l:'Főbb gázok'},{v:'91 000',l:'Halálos áldozat'}],extra:'Az Ipernél bevetett klórgáz 6000 katona halálát okozta egyetlen nap alatt.',vis:'gas'},
-  {icon:'🚗',tag:'Páncélos jármű',name:'Harckocsi (Tank)',desc:'1916-ban a britek vetették be először a Somme-nál. Korai modelljei megbízhatatlanok voltak, de megváltoztatták a hadviselést örökre.',stats:[{v:'1916',l:'Első bevetés'},{v:'8 km/h',l:'Sebesség'},{v:'28 t',l:'Súly (Mk I)'}],extra:'Az első bevetésnél 49 tankból csak 18 érte el a frontvonalat.',vis:'tank'},
-  {icon:'✈️',tag:'Légi hadviselés',name:'Katonai repülő',desc:'A repülők eleinte csak felderítésre szolgáltak. A háború végére vadászgépek és bombázók uralták az eget.',stats:[{v:'180 km/h',l:'Max sebesség'},{v:'80+',l:'Richthofen győzelmei'},{v:'~8 000',l:'Bevetett gép'}],extra:'Manfred von Richthofen, a „Vörös Báró" 80 légi győzelmet szerzett.',vis:'plane'},
-  {icon:'🔫',tag:'Gyalogsági fegyver',name:'Géppuska',desc:'A Maxim-géppuska percenként 600 lövést adhatott le. Egyetlen állás megállíthatta az egész rohamot.',stats:[{v:'600/perc',l:'Tűzgyorsaság'},{v:'2 km',l:'Hatótáv'},{v:'4 fős',l:'Kezelők'}],extra:'A Somme-i csata első napján a britek 57 470 embert veszítettek — főleg géppuskatűzben.',vis:'gun'},
-  {icon:'🚢',tag:'Tengeri hadviselés',name:'Tengeralattjáró (U-Boot)',desc:'A német U-Bootok blokádot hoztak létre az Atlanti-óceánon. A Lusitania elsüllyesztése az USA-t a háborúba sodorta.',stats:[{v:'~350',l:'Elsüllyesztett hajó'},{v:'30 m',l:'Merülési mélység'},{v:'373',l:'Bevetett U-Boot'}],extra:'A Lusitania elsüllyesztése (1915) 1 198 ember halálát okozta.',vis:'sub'}
+  {icon:'💣',tag:'Tüzérség',name:'Tüzérségi ágyú',desc:'A háború legtöbb halálos áldozatát a tüzérség okozta. A nehézágyúk akár 40 km-es hatótávolsággal rendelkeztek, és tonnányi fémet zúdítottak az ellenséges állásokra nap mint nap.',stats:[{v:'40 km',l:'Hatótáv'},{v:'~60%',l:'Összes halálozás'},{v:'750 kg',l:'Lövedék súlya'}],extra:'A „Big Bertha" nevű német nehézágyú 940 kg-os lövedékeket lőhetett ki, és Párizst is elérte.',vis:'cannon',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Howitzer_world_war_1.jpg/320px-Howitzer_world_war_1.jpg'},
+  {icon:'⚗️',tag:'Vegyifegyver',name:'Mérges gáz',desc:'1915-től klórgáz, foszgén és mustárgáz terrorba taszította a lövészárkokat. A mustárgáz bőrön, tüdőn és szemeken át egyaránt hatott.',stats:[{v:'1915',l:'Első bevetés'},{v:'3 típus',l:'Főbb gázok'},{v:'91 000',l:'Halálos áldozat'}],extra:'Az Ipernél bevetett klórgáz 6000 katona halálát okozta egyetlen nap alatt.',vis:'gas',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Second_Battle_of_Ypres_22_April_-_25_May_1915.png/320px-Second_Battle_of_Ypres_22_April_-_25_May_1915.png'},
+  {icon:'🚗',tag:'Páncélos jármű',name:'Harckocsi (Tank)',desc:'1916-ban a britek vetették be először a Somme-nál. Korai modelljei megbízhatatlanok voltak, de megváltoztatták a hadviselést örökre.',stats:[{v:'1916',l:'Első bevetés'},{v:'8 km/h',l:'Sebesség'},{v:'28 t',l:'Súly (Mk I)'}],extra:'Az első bevetésnél 49 tankból csak 18 érte el a frontvonalat.',vis:'tank',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Mark_I_series_tank.jpg/320px-Mark_I_series_tank.jpg'},
+  {icon:'✈️',tag:'Légi hadviselés',name:'Katonai repülő',desc:'A repülők eleinte csak felderítésre szolgáltak. A háború végére vadászgépek és bombázók uralták az eget.',stats:[{v:'180 km/h',l:'Max sebesség'},{v:'80+',l:'Richthofen győzelmei'},{v:'~8 000',l:'Bevetett gép'}],extra:'Manfred von Richthofen, a „Vörös Báró" 80 légi győzelmet szerzett.',vis:'plane',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Fokker_Dr.I_fighters_of_Jagdgeschwader_I.jpg/320px-Fokker_Dr.I_fighters_of_Jagdgeschwader_I.jpg'},
+  {icon:'🔫',tag:'Gyalogsági fegyver',name:'Géppuska',desc:'A Maxim-géppuska percenként 600 lövést adhatott le. Egyetlen állás megállíthatta az egész rohamot.',stats:[{v:'600/perc',l:'Tűzgyorsaság'},{v:'2 km',l:'Hatótáv'},{v:'4 fős',l:'Kezelők'}],extra:'A Somme-i csata első napján a britek 57 470 embert veszítettek — főleg géppuskatűzben.',vis:'gun',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Vickers_machine_gun_crew_with_gas_masks.jpg/320px-Vickers_machine_gun_crew_with_gas_masks.jpg'},
+  {icon:'🚢',tag:'Tengeri hadviselés',name:'Tengeralattjáró (U-Boot)',desc:'A német U-Bootok blokádot hoztak létre az Atlanti-óceánon. A Lusitania elsüllyesztése az USA-t a háborúba sodorta.',stats:[{v:'~350',l:'Elsüllyesztett hajó'},{v:'30 m',l:'Merülési mélység'},{v:'373',l:'Bevetett U-Boot'}],extra:'A Lusitania elsüllyesztése (1915) 1 198 ember halálát okozta.',vis:'sub',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/German_submarine_U-14_%281910%29.jpg/320px-German_submarine_U-14_%281910%29.jpg'}
 ];
 
 const TL=[
@@ -190,7 +197,16 @@ const QZ=[
   {q:'Hány győzelmet szerzett Manfred von Richthofen?',opts:['40','60','80','100'],c:2,exp:'Manfred von Richthofen 80 légi győzelmet szerzett — ő a történelem legeredményesebb vadászpilótája.'},
   {q:'Melyik hajó elsüllyesztése sodorta az USA-t a háborúba?',opts:['Titanic','Lusitania','Bismarck','Olympic'],c:1,exp:'A Lusitania 1915-ös elsüllyesztése 1 198 áldozatot követelt, köztük 128 amerikait.'},
   {q:'A Maxim-géppuska hány lövést adott le percenként?',opts:['100','300','600','1200'],c:2,exp:'A Maxim-géppuska percenként kb. 600 lövést adhatott le.'},
-  {q:'Melyik ország fejlesztette ki az első tankokat?',opts:['Franciaország','Németország','Nagy-Britannia','Oroszország'],c:2,exp:'A britek fejlesztették ki az első harckocsikat, Mark I névvel, 1916-ban.'}
+  {q:'Melyik ország fejlesztette ki az első tankokat?',opts:['Franciaország','Németország','Nagy-Britannia','Oroszország'],c:2,exp:'A britek fejlesztették ki az első harckocsikat, Mark I névvel, 1916-ban.'},
+  {q:'Mikor gyilkolták meg Ferenc Ferdinándot Szarajevóban?',opts:['1913. június 28.','1914. június 28.','1914. augusztus 4.','1915. május 7.'],c:1,exp:'Ferenc Ferdinánd osztrák-magyar trónörököst 1914. június 28-án lőtte le Gavrilo Princip szerb nacionalista Szarajevóban.'},
+  {q:'Mi volt a "Big Bertha" nevű német nehézágyú lövedékének tömege?',opts:['250 kg','500 kg','940 kg','1 200 kg'],c:2,exp:'A "Big Bertha" 940 kg-os lövedékeket lőhetett ki, hatótávolsága több mint 12 km volt.'},
+  {q:'Hány katona halt meg a Somme-i csata első napján brit oldalon?',opts:['12 000','57 470','80 000','1 200'],c:1,exp:'1916. július 1-jén a britek 57 470 embert veszítettek egyetlen nap alatt — főleg géppuskatűzben.'},
+  {q:'Hány U-Boot állt a német haditengerészet rendelkezésére a háború során összesen?',opts:['120','373','500','800'],c:1,exp:'A háború folyamán összesen 373 U-Bootot vetett be Németország az Atlanti-óceánon és más vizeken.'},
+  {q:'Melyik évben lépett az Egyesült Államok az első világháborúba?',opts:['1915','1916','1917','1918'],c:2,exp:'Az USA 1917 áprilisában üzent hadat Németországnak, miután a Zimmermann-távirat és a korlátlan U-Boot-háború nyilvánossá vált.'},
+  {q:'Hány halálos áldozatot szedett a mérges gáz a háború alatt összesen?',opts:['9 000','91 000','250 000','1 000 000'],c:1,exp:'A mérges gáz kb. 91 000 katona halálát okozta, és mintegy 1,2 millió embert sebesített meg.'},
+  {q:'Melyik csatában álltak szemben egymással a legtöbb ideig a felek a lövészárokháborúban?',opts:['Marne','Gallipolii','Verdun','Somme'],c:2,exp:'A verduni csata 1916. február 21-től december 18-ig tartott — közel 10 hónapig, kb. 700 000 áldozattal.'},
+  {q:'Mi volt az első katonai repülők elsődleges feladata a háború elején?',opts:['Bombázás','Légi harc','Felderítés','Szállítás'],c:2,exp:'A repülőket kezdetben kizárólag felderítésre használták — fényképeket készítettek az ellenséges állásokról.'},
+  {q:'Mikor lépett életbe a fegyverszünet és ért véget a háború?',opts:['1918. október 1., 10:00','1918. november 11., 11:00','1919. január 1., 00:00','1918. december 24., 12:00'],c:1,exp:'A fegyverszünet 1918. november 11-én pontosan 11 órakor lépett életbe — a „11. nap 11. hónap 11. óra" máig emlékezetes dátum.'}
 ];
 
 let aW=0,aCmp='pusztitas',qI=0,qScore=0,qAns=false,qDone=false;
@@ -222,84 +238,283 @@ function switchTab(id,btn){
 }
 
 function buildVisual(type,container){
+  // inject keyframes for visuals if not already present
+  if(!document.getElementById('vis-kf')){
+    const s=document.createElement('style');s.id='vis-kf';
+    s.textContent=`
+      @keyframes tankRoll{0%{transform:translateX(-60px)}100%{transform:translateX(60px)}}
+      @keyframes tankShot{0%,80%,100%{opacity:0;transform:translateX(0) scaleX(0.2)}10%{opacity:1;transform:translateX(40px) scaleX(1)}60%{opacity:0.6;transform:translateX(90px) scaleX(0.5)}}
+      @keyframes planeLoop{0%{transform:translate(0px,0px) rotate(0deg)}25%{transform:translate(80px,-18px) rotate(-8deg)}50%{transform:translate(160px,0px) rotate(0deg)}75%{transform:translate(80px,18px) rotate(8deg)}100%{transform:translate(0px,0px) rotate(0deg)}}
+      @keyframes subFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+      @keyframes subBubble{0%{transform:translateY(0);opacity:0.7}100%{transform:translateY(-30px);opacity:0}}
+      @keyframes torpedoFly{0%{transform:translateX(0);opacity:1}100%{transform:translateX(220px);opacity:0}}
+      @keyframes shellArc{0%{transform:translate(0,0) rotate(-20deg);opacity:1}50%{transform:translate(120px,-30px) rotate(0deg);opacity:1}100%{transform:translate(240px,10px) rotate(20deg);opacity:0}}
+      @keyframes muzzleFlash{0%,100%{opacity:0;transform:scale(0)}15%{opacity:1;transform:scale(1)}40%{opacity:0;transform:scale(0.5)}}
+      @keyframes bulletFly{0%{transform:translateX(0);opacity:1}100%{transform:translateX(300px);opacity:0}}
+      @keyframes recoil{0%,100%{transform:translateX(0)}15%{transform:translateX(-6px)}30%{transform:translateX(0)}}
+    `;
+    document.head.appendChild(s);
+  }
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('viewBox','0 0 500 120');
   svg.setAttribute('width','100%');svg.setAttribute('height','100%');
   svg.style.position='absolute';svg.style.inset='0';
   if(type==='cannon'){
-    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
-    const shell=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
-    shell.setAttribute('cx','50%');shell.setAttribute('cy','50%');
-    shell.setAttribute('rx','8');shell.setAttribute('ry','5');
-    shell.setAttribute('fill','#b8933a');
-    shell.style.animation='shellFly 2s ease infinite';
-    const trail=document.createElementNS('http://www.w3.org/2000/svg','line');
-    trail.setAttribute('x1','0');trail.setAttribute('y1','60');trail.setAttribute('x2','100%');trail.setAttribute('y2','60');
-    trail.setAttribute('stroke','rgba(180,140,60,0.12)');trail.setAttribute('stroke-width','1');
-    trail.setAttribute('stroke-dasharray','6 4');
-    svg.appendChild(trail);svg.appendChild(shell);
+    // Ground line
+    const gnd=document.createElementNS('http://www.w3.org/2000/svg','line');
+    gnd.setAttribute('x1','0');gnd.setAttribute('y1','95');gnd.setAttribute('x2','500');gnd.setAttribute('y2','95');
+    gnd.setAttribute('stroke','rgba(180,140,60,0.15)');gnd.setAttribute('stroke-width','1');
+    // Cannon body
+    const cg=document.createElementNS('http://www.w3.org/2000/svg','g');
+    cg.style.animation='recoil 1.8s ease infinite';
+    const cbase=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    cbase.setAttribute('x','60');cbase.setAttribute('y','72');cbase.setAttribute('width','80');cbase.setAttribute('height','22');
+    cbase.setAttribute('fill','rgba(180,140,60,0.2)');cbase.setAttribute('stroke','rgba(180,140,60,0.4)');cbase.setAttribute('stroke-width','1');cbase.setAttribute('rx','3');
+    const cbarrel=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    cbarrel.setAttribute('x','110');cbarrel.setAttribute('y','66');cbarrel.setAttribute('width','70');cbarrel.setAttribute('height','12');
+    cbarrel.setAttribute('fill','rgba(180,140,60,0.35)');cbarrel.setAttribute('stroke','rgba(180,140,60,0.55)');cbarrel.setAttribute('stroke-width','1');cbarrel.setAttribute('rx','2');
+    // Wheel
+    const wh=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    wh.setAttribute('cx','90');wh.setAttribute('cy','94');wh.setAttribute('r','14');
+    wh.setAttribute('fill','none');wh.setAttribute('stroke','rgba(180,140,60,0.4)');wh.setAttribute('stroke-width','2');
+    const wh2=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    wh2.setAttribute('cx','130');wh2.setAttribute('cy','94');wh2.setAttribute('r','14');
+    wh2.setAttribute('fill','none');wh2.setAttribute('stroke','rgba(180,140,60,0.4)');wh2.setAttribute('stroke-width','2');
+    cg.appendChild(cbase);cg.appendChild(cbarrel);cg.appendChild(wh);cg.appendChild(wh2);
+    // Muzzle flash
+    const flash=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    flash.setAttribute('cx','185');flash.setAttribute('cy','72');flash.setAttribute('rx','12');flash.setAttribute('ry','7');
+    flash.setAttribute('fill','rgba(255,200,60,0.7)');
+    flash.style.animation='muzzleFlash 1.8s ease infinite';
+    // Shell arcing
+    const sh=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    sh.setAttribute('cx','190');sh.setAttribute('cy','70');sh.setAttribute('rx','7');sh.setAttribute('ry','4');
+    sh.setAttribute('fill','#b8933a');
+    sh.style.animation='shellArc 1.8s ease infinite';
+    // Smoke puffs
+    for(let i=0;i<4;i++){
+      const sp=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      sp.setAttribute('cx',`${360+i*18}`);sp.setAttribute('cy','60');sp.setAttribute('r',`${8+i*4}`);
+      sp.setAttribute('fill','rgba(180,140,60,0.07)');
+      sp.style.animation=`smokePuff ${1.5+i*0.3}s ease infinite`;sp.style.animationDelay=`${i*0.25}s`;
+      svg.appendChild(sp);
+    }
+    svg.appendChild(gnd);svg.appendChild(cg);svg.appendChild(flash);svg.appendChild(sh);
   } else if(type==='gas'){
+    // Ground
+    const gnd=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    gnd.setAttribute('x','0');gnd.setAttribute('y','90');gnd.setAttribute('width','500');gnd.setAttribute('height','30');
+    gnd.setAttribute('fill','rgba(60,80,40,0.15)');
+    svg.appendChild(gnd);
+    // Canister
+    const can=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    can.setAttribute('x','30');can.setAttribute('y','70');can.setAttribute('width','22');can.setAttribute('height','30');
+    can.setAttribute('fill','rgba(80,100,60,0.4)');can.setAttribute('stroke','rgba(120,150,60,0.5)');can.setAttribute('stroke-width','1');can.setAttribute('rx','3');
+    const canTop=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    canTop.setAttribute('cx','41');canTop.setAttribute('cy','70');canTop.setAttribute('rx','11');canTop.setAttribute('ry','5');
+    canTop.setAttribute('fill','rgba(100,130,60,0.5)');
+    svg.appendChild(can);svg.appendChild(canTop);
+    // Gas clouds in green/yellow tones
+    const gasColors=['rgba(80,160,60,0.22)','rgba(120,180,40,0.18)','rgba(100,170,50,0.2)','rgba(60,140,50,0.16)','rgba(140,190,30,0.15)','rgba(90,155,45,0.19)'];
     for(let i=0;i<6;i++){
       const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
-      c.setAttribute('cx',`${15+i*14}%`);c.setAttribute('cy','70%');
-      c.setAttribute('r',`${12+Math.random()*10}`);
-      c.setAttribute('fill',`rgba(${80+i*10},${140+i*8},${60},0.18)`);
-      c.style.animation=`smokePuff ${2+i*0.4}s ease infinite`;
-      c.style.animationDelay=`${i*0.3}s`;
+      c.setAttribute('cx',`${70+i*65}`);c.setAttribute('cy','80');c.setAttribute('r',`${18+i*4}`);
+      c.setAttribute('fill',gasColors[i]);
+      c.style.animation=`smokePuff ${2.2+i*0.35}s ease infinite`;c.style.animationDelay=`${i*0.28}s`;
       svg.appendChild(c);
     }
   } else if(type==='tank'){
+    // Ground
+    const gnd=document.createElementNS('http://www.w3.org/2000/svg','line');
+    gnd.setAttribute('x1','0');gnd.setAttribute('y1','95');gnd.setAttribute('x2','500');gnd.setAttribute('y2','95');
+    gnd.setAttribute('stroke','rgba(180,140,60,0.15)');gnd.setAttribute('stroke-width','1');
+    svg.appendChild(gnd);
+    // Rolling tank group
+    const tg=document.createElementNS('http://www.w3.org/2000/svg','g');
+    tg.style.animation='tankRoll 3s ease-in-out infinite alternate';
+    // Track
+    const track=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    track.setAttribute('x','140');track.setAttribute('y','78');track.setAttribute('width','120');track.setAttribute('height','16');
+    track.setAttribute('fill','rgba(180,140,60,0.12)');track.setAttribute('stroke','rgba(180,140,60,0.35)');track.setAttribute('stroke-width','1');track.setAttribute('rx','7');
+    // Body
     const body=document.createElementNS('http://www.w3.org/2000/svg','rect');
-    body.setAttribute('x','30%');body.setAttribute('y','45%');
-    body.setAttribute('width','40%');body.setAttribute('height','30%');
-    body.setAttribute('fill','rgba(180,140,60,0.15)');body.setAttribute('stroke','rgba(180,140,60,0.3)');body.setAttribute('stroke-width','1');body.setAttribute('rx','3');
+    body.setAttribute('x','150');body.setAttribute('y','62');body.setAttribute('width','100');body.setAttribute('height','18');
+    body.setAttribute('fill','rgba(180,140,60,0.18)');body.setAttribute('stroke','rgba(180,140,60,0.4)');body.setAttribute('stroke-width','1');body.setAttribute('rx','2');
+    // Turret
     const turret=document.createElementNS('http://www.w3.org/2000/svg','rect');
-    turret.setAttribute('x','42%');turret.setAttribute('y','33%');
-    turret.setAttribute('width','16%');turret.setAttribute('height','15%');
-    turret.setAttribute('fill','rgba(180,140,60,0.2)');turret.setAttribute('rx','2');
-    const barrel=document.createElementNS('http://www.w3.org/2000/svg','line');
-    barrel.setAttribute('x1','58%');barrel.setAttribute('y1','40%');barrel.setAttribute('x2','72%');barrel.setAttribute('y2','40%');
-    barrel.setAttribute('stroke','rgba(180,140,60,0.5)');barrel.setAttribute('stroke-width','2');
-    svg.appendChild(body);svg.appendChild(turret);svg.appendChild(barrel);
-    svg.style.animation='fadeIn 0.5s ease';
+    turret.setAttribute('x','175');turret.setAttribute('y','50');turret.setAttribute('width','50');turret.setAttribute('height','14');
+    turret.setAttribute('fill','rgba(180,140,60,0.25)');turret.setAttribute('stroke','rgba(180,140,60,0.45)');turret.setAttribute('stroke-width','1');turret.setAttribute('rx','2');
+    // Barrel
+    const barrel=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    barrel.setAttribute('x','225');barrel.setAttribute('y','54');barrel.setAttribute('width','45');barrel.setAttribute('height','6');
+    barrel.setAttribute('fill','rgba(180,140,60,0.5)');barrel.setAttribute('rx','2');
+    // Wheels
+    [155,175,200,225,245].forEach(cx=>{
+      const w=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      w.setAttribute('cx',cx);w.setAttribute('cy','88');w.setAttribute('r','7');
+      w.setAttribute('fill','none');w.setAttribute('stroke','rgba(180,140,60,0.45)');w.setAttribute('stroke-width','2');
+      tg.appendChild(w);
+    });
+    tg.appendChild(track);tg.appendChild(body);tg.appendChild(turret);tg.appendChild(barrel);
+    // Shot flash
+    const flash=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    flash.setAttribute('cx','275');flash.setAttribute('cy','57');flash.setAttribute('rx','10');flash.setAttribute('ry','6');
+    flash.setAttribute('fill','rgba(255,200,60,0.75)');
+    flash.style.animation='muzzleFlash 3s ease infinite';
+    tg.appendChild(flash);
+    svg.appendChild(tg);
+    // Shell flying right
+    const sh=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    sh.setAttribute('cx','280');sh.setAttribute('cy','57');sh.setAttribute('rx','6');sh.setAttribute('ry','3');
+    sh.setAttribute('fill','#c8a050');
+    sh.style.animation='tankShot 3s ease infinite';
+    svg.appendChild(sh);
   } else if(type==='plane'){
-    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
-    path.setAttribute('d','M 120 60 L 160 55 L 200 60 L 180 65 L 180 72 L 160 70 L 140 72 L 140 65 Z');
-    path.setAttribute('fill','rgba(180,140,60,0.15)');path.setAttribute('stroke','rgba(180,140,60,0.35)');path.setAttribute('stroke-width','1');
-    path.style.animation='shellFly 3s ease-in-out infinite';
-    svg.appendChild(path);
+    // Sky lines
+    for(let i=0;i<3;i++){
+      const cl=document.createElementNS('http://www.w3.org/2000/svg','line');
+      cl.setAttribute('x1','0');cl.setAttribute('y1',`${30+i*25}`);cl.setAttribute('x2','500');cl.setAttribute('y2',`${30+i*25}`);
+      cl.setAttribute('stroke','rgba(180,140,60,0.05)');cl.setAttribute('stroke-width','1');
+      cl.setAttribute('stroke-dasharray','8 12');
+      svg.appendChild(cl);
+    }
+    // Plane group looping
+    const pg=document.createElementNS('http://www.w3.org/2000/svg','g');
+    pg.style.animation='planeLoop 4s ease-in-out infinite';
+    pg.setAttribute('transform','translate(120,30)');
+    // Fuselage
+    const fus=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    fus.setAttribute('cx','60');fus.setAttribute('cy','30');fus.setAttribute('rx','38');fus.setAttribute('ry','8');
+    fus.setAttribute('fill','rgba(180,140,60,0.2)');fus.setAttribute('stroke','rgba(180,140,60,0.45)');fus.setAttribute('stroke-width','1');
+    // Wings
+    const wing=document.createElementNS('http://www.w3.org/2000/svg','path');
+    wing.setAttribute('d','M 40 30 L 10 15 L 15 30 L 10 45 L 40 30');
+    wing.setAttribute('fill','rgba(180,140,60,0.18)');wing.setAttribute('stroke','rgba(180,140,60,0.38)');wing.setAttribute('stroke-width','1');
+    // Tail
+    const tail=document.createElementNS('http://www.w3.org/2000/svg','path');
+    tail.setAttribute('d','M 90 30 L 108 18 L 105 30 L 108 42 L 90 30');
+    tail.setAttribute('fill','rgba(180,140,60,0.15)');tail.setAttribute('stroke','rgba(180,140,60,0.3)');tail.setAttribute('stroke-width','1');
+    // Propeller
+    const prop=document.createElementNS('http://www.w3.org/2000/svg','line');
+    prop.setAttribute('x1','22');prop.setAttribute('y1','18');prop.setAttribute('x2','22');prop.setAttribute('y2','42');
+    prop.setAttribute('stroke','rgba(180,140,60,0.6)');prop.setAttribute('stroke-width','2');
+    prop.style.animation='spin 0.3s linear infinite';
+    prop.style.transformOrigin='22px 30px';
+    pg.appendChild(wing);pg.appendChild(tail);pg.appendChild(fus);pg.appendChild(prop);
+    // Exhaust puffs trailing behind
+    for(let i=0;i<3;i++){
+      const ep=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      ep.setAttribute('cx',`${115+i*18}`);ep.setAttribute('cy','30');ep.setAttribute('r',`${5+i*4}`);
+      ep.setAttribute('fill','rgba(180,140,60,0.06)');
+      ep.style.animation=`smokePuff ${1.2+i*0.3}s ease infinite`;ep.style.animationDelay=`${i*0.2}s`;
+      pg.appendChild(ep);
+    }
+    svg.appendChild(pg);
   } else if(type==='gun'){
-    for(let i=0;i<8;i++){
-      const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
-      dot.setAttribute('cx',`${10+i*12}%`);dot.setAttribute('cy','50%');dot.setAttribute('r','3');
-      dot.setAttribute('fill','#b8933a');dot.style.opacity='0';
-      dot.style.animation=`fadeIn 0.1s ease ${i*0.08}s both, smokeRise 1s ease ${i*0.08}s infinite`;
-      svg.appendChild(dot);
+    // Ground
+    const gnd=document.createElementNS('http://www.w3.org/2000/svg','line');
+    gnd.setAttribute('x1','0');gnd.setAttribute('y1','90');gnd.setAttribute('x2','500');gnd.setAttribute('y2','90');
+    gnd.setAttribute('stroke','rgba(180,140,60,0.12)');gnd.setAttribute('stroke-width','1');
+    svg.appendChild(gnd);
+    // Gun body with recoil
+    const gg=document.createElementNS('http://www.w3.org/2000/svg','g');
+    gg.style.animation='recoil 0.8s ease infinite';
+    const gstock=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    gstock.setAttribute('x','40');gstock.setAttribute('y','65');gstock.setAttribute('width','55');gstock.setAttribute('height','14');
+    gstock.setAttribute('fill','rgba(180,140,60,0.2)');gstock.setAttribute('stroke','rgba(180,140,60,0.38)');gstock.setAttribute('stroke-width','1');gstock.setAttribute('rx','2');
+    const gbarrel=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    gbarrel.setAttribute('x','90');gbarrel.setAttribute('y','67');gbarrel.setAttribute('width','60');gbarrel.setAttribute('height','10');
+    gbarrel.setAttribute('fill','rgba(180,140,60,0.32)');gbarrel.setAttribute('stroke','rgba(180,140,60,0.5)');gbarrel.setAttribute('stroke-width','1');gbarrel.setAttribute('rx','2');
+    // Tripod legs
+    ['M 55 79 L 40 90','M 70 79 L 70 90','M 85 79 L 100 90'].forEach(d=>{
+      const leg=document.createElementNS('http://www.w3.org/2000/svg','path');
+      leg.setAttribute('d',d);leg.setAttribute('stroke','rgba(180,140,60,0.35)');leg.setAttribute('stroke-width','2');leg.setAttribute('fill','none');
+      gg.appendChild(leg);
+    });
+    // Muzzle flash
+    const gflash=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    gflash.setAttribute('cx','155');gflash.setAttribute('cy','72');gflash.setAttribute('rx','10');gflash.setAttribute('ry','6');
+    gflash.setAttribute('fill','rgba(255,200,60,0.8)');
+    gflash.style.animation='muzzleFlash 0.8s ease infinite';
+    gg.appendChild(gstock);gg.appendChild(gbarrel);gg.appendChild(gflash);
+    svg.appendChild(gg);
+    // Rapid bullet stream
+    for(let i=0;i<6;i++){
+      const bullet=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+      bullet.setAttribute('cx','160');bullet.setAttribute('cy','72');bullet.setAttribute('rx','5');bullet.setAttribute('ry','2.5');
+      bullet.setAttribute('fill','#c8a050');
+      bullet.style.animation=`bulletFly 0.8s linear infinite`;
+      bullet.style.animationDelay=`${i*0.13}s`;
+      svg.appendChild(bullet);
     }
   } else if(type==='sub'){
+    // Water surface
+    const water=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    water.setAttribute('x','0');water.setAttribute('y','55');water.setAttribute('width','500');water.setAttribute('height','65');
+    water.setAttribute('fill','rgba(30,60,100,0.18)');
+    svg.appendChild(water);
+    // Water wave
+    const wwave=document.createElementNS('http://www.w3.org/2000/svg','path');
+    wwave.setAttribute('d','M 0 55 Q 60 48 120 55 Q 180 62 240 55 Q 300 48 360 55 Q 420 62 500 55');
+    wwave.setAttribute('fill','none');wwave.setAttribute('stroke','rgba(100,150,200,0.3)');wwave.setAttribute('stroke-width','2');
+    svg.appendChild(wwave);
     const hull=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
-    hull.setAttribute('cx','50%');hull.setAttribute('cy','65%');hull.setAttribute('rx','25%');hull.setAttribute('ry','12%');
-    hull.setAttribute('fill','rgba(180,140,60,0.12)');hull.setAttribute('stroke','rgba(180,140,60,0.28)');hull.setAttribute('stroke-width','1');
-    const wave=document.createElementNS('http://www.w3.org/2000/svg','path');
-    wave.setAttribute('d','M 20 52 Q 60 45 100 52 Q 140 59 180 52 Q 220 45 260 52');
-    wave.setAttribute('fill','none');wave.setAttribute('stroke','rgba(100,150,200,0.25)');wave.setAttribute('stroke-width','2');
-    svg.appendChild(wave);svg.appendChild(hull);
+    hull.setAttribute('cx','250');hull.setAttribute('cy','78');hull.setAttribute('rx','110');hull.setAttribute('ry','16');
+    hull.setAttribute('fill','rgba(180,140,60,0.15)');hull.setAttribute('stroke','rgba(180,140,60,0.35)');hull.setAttribute('stroke-width','1.5');
+    // Conning tower
+    const tower=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    tower.setAttribute('x','230');tower.setAttribute('y','46');tower.setAttribute('width','30');tower.setAttribute('height','14');
+    tower.setAttribute('fill','rgba(180,140,60,0.22)');tower.setAttribute('stroke','rgba(180,140,60,0.4)');tower.setAttribute('stroke-width','1');tower.setAttribute('rx','2');
+    // Periscope
+    const scope=document.createElementNS('http://www.w3.org/2000/svg','line');
+    scope.setAttribute('x1','245');scope.setAttribute('y1','30');scope.setAttribute('x2','245');scope.setAttribute('y2','46');
+    scope.setAttribute('stroke','rgba(180,140,60,0.5)');scope.setAttribute('stroke-width','2');
+    const scopeTop=document.createElementNS('http://www.w3.org/2000/svg','line');
+    scopeTop.setAttribute('x1','245');scopeTop.setAttribute('y1','30');scopeTop.setAttribute('x2','265');scopeTop.setAttribute('y2','30');
+    scopeTop.setAttribute('stroke','rgba(180,140,60,0.5)');scopeTop.setAttribute('stroke-width','2');
+    // Torpedo flying
+    const torp=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    torp.setAttribute('cx','140');torp.setAttribute('cy','78');torp.setAttribute('rx','22');torp.setAttribute('ry','5');
+    torp.setAttribute('fill','rgba(180,140,60,0.55)');torp.setAttribute('stroke','rgba(180,140,60,0.7)');torp.setAttribute('stroke-width','1');
+    torp.style.animation='torpedoFly 2.5s ease-in infinite';
+    // Bubble stream
+    for(let i=0;i<5;i++){
+      const b=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      b.setAttribute('cx',`${200+i*20}`);b.setAttribute('cy','65');b.setAttribute('r',`${3+i}`);
+      b.setAttribute('fill','none');b.setAttribute('stroke','rgba(120,180,220,0.4)');b.setAttribute('stroke-width','1');
+      b.style.animation=`subBubble ${1.2+i*0.2}s ease infinite`;b.style.animationDelay=`${i*0.22}s`;
+      svg.appendChild(b);
+    }
+    // Sub floats up and down
+    const subG=document.createElementNS('http://www.w3.org/2000/svg','g');
+    subG.style.animation='subFloat 2.8s ease-in-out infinite';
+    subG.appendChild(hull);subG.appendChild(tower);subG.appendChild(scope);subG.appendChild(scopeTop);
+    svg.appendChild(subG);svg.appendChild(torp);
   }
   container.appendChild(svg);
 }
 
 function renderW(){
   document.getElementById('wNav').innerHTML=W.map((w,i)=>`
-    <div class="w-btn${i===aW?' active':''}" onclick="selW(${i},this)" style="animation:fadeUp 0.4s ease ${i*0.05}s both">
-      <span class="w-icon">${w.icon}</span>
-      <span class="w-name">${w.name}</span>
+    <div class="w-btn${i===aW?' active':''}" onclick="selW(${i},this)" style="animation:fadeUp 0.4s ease ${i*0.05}s both;padding:0;overflow:hidden">
+      <img class="w-btn-photo" src="${w.photo}" alt="${w.name}" onerror="this.style.display='none'">
+      <div class="w-btn-bottom">
+        <span class="w-icon" style="font-size:20px;margin:0">${w.icon}</span>
+        <span class="w-name">${w.name}</span>
+      </div>
     </div>`).join('');
   const w=W[aW];
   document.getElementById('wDetail').innerHTML=`
     <div class="wd">
       <div class="wd-top">
-        <span class="wd-ico">${w.icon}</span>
-        <div>
-          <span class="wd-tag">${w.tag}</span>
+        <div class="wd-photo-wrap">
+          <div class="wd-photo-frame">
+            <img class="wd-photo" src="${w.photo}" alt="${w.name}" onerror="this.parentElement.parentElement.style.display='none'">
+          </div>
+          <div class="wd-photo-cap">Korabeli fénykép · közkincses</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="display:flex;align-items:center;gap:8px"><span class="wd-ico" style="font-size:36px">${w.icon}</span><span class="wd-tag">${w.tag}</span></span>
           <div class="wd-name">${w.name}</div>
           <div class="wd-desc">${w.desc}</div>
         </div>
